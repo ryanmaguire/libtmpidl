@@ -26,7 +26,7 @@
  ******************************************************************************/
 
 /*  Geometry routines found here.                                             */
-#include <libtmpl/include/tmpl_euclidean_planar_geometry.h>
+#include <libtmpl/include/tmpl_vec2.h>
 
 /*  IDL's ULONG is 32-bits. Use stdint for portability.                       */
 #include <stdint.h>
@@ -37,7 +37,7 @@ extern void tmpidl_Vec2_Norm(int argc, void *argv[]);
 void tmpidl_Vec2_Norm(int argc, void *argv[])
 {
     /*  Pointers for the input and output data.                               */
-    tmpl_TwoVector *in;
+    tmpl_TwoVectorDouble *in;
     double *out;
 
     /*  Variable for indexing and for the total number of elements            */
@@ -48,7 +48,7 @@ void tmpidl_Vec2_Norm(int argc, void *argv[])
         return;
 
     /*  Extract the data.                                                     */
-    in = (tmpl_TwoVector *)argv[0];
+    in = (tmpl_TwoVectorDouble *)argv[0];
     size = *(uint32_t *)argv[1];
     out = (double *)argv[2];
 
@@ -57,6 +57,6 @@ void tmpidl_Vec2_Norm(int argc, void *argv[])
 #pragma omp parallel for
 #endif
     for (n = 0UL; n < size; ++n)
-        out[n] = tmpl_TwoVector_Euclidean_Norm(in[n]);
+        out[n] = tmpl_2DDouble_L2_Norm(&in[n]);
 }
 /*  End of tmpidl_Vec2_Norm.                                                  */

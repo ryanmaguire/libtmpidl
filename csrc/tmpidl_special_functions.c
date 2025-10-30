@@ -26,7 +26,7 @@
  ******************************************************************************/
 
 /*  All special functions functions are found here.                           */
-#include <libtmpl/include/tmpl_special_functions.h>
+#include <libtmpl/include/tmpl_special_functions_real.h>
 
 /*  IDL's ULONG is 32-bits. Use stdint for portability.                       */
 #include <stdint.h>
