@@ -25,7 +25,6 @@ BUILD_DIR := ./build
 SRC_DIRS := ./csrc
 SRCS := $(shell find $(SRC_DIRS) -name "*.c")
 OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.o)
-DEPS := $(OBJS:.o=.d)
 
 ifdef omp
 	CFLAGS := $(CFLAGS) -O3 -fPIC -flto -fopenmp -DNDEBUG
@@ -43,7 +42,7 @@ $(TARGET_LIB): $(OBJS)
 	$(CC) $(OBJS) $(LFLAGS) -o $@ -lm
 
 $(BUILD_DIR)/%.o: %.c
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -57,6 +56,3 @@ uninstall:
 	rm -rf $(BUILD_DIR)
 	rm -f $(TARGET_LIB)
 	rm -f /usr/local/lib/$(TARGET_LIB)
-
--include $(DEPS)
-
