@@ -1,22 +1,22 @@
 /******************************************************************************
- *                                 LICENSE                                    *
+ *                                  LICENSE                                   *
  ******************************************************************************
- *  This file is part of libtmpl.                                             *
+ *  This file is part of libtmpidl.                                           *
  *                                                                            *
- *  libtmpl is free software: you can redistribute it and/or modify it        *
+ *  libtmpidl is free software: you can redistribute it and/or modify it      *
  *  under the terms of the GNU General Public License as published by         *
  *  the Free Software Foundation, either version 3 of the License, or         *
  *  (at your option) any later version.                                       *
  *                                                                            *
- *  libtmpl is distributed in the hope that it will be useful,                *
+ *  libtmpidl is distributed in the hope that it will be useful,              *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
  *  GNU General Public License for more details.                              *
  *                                                                            *
  *  You should have received a copy of the GNU General Public License         *
- *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
+ *  along with libtmpidl.  If not, see <https://www.gnu.org/licenses/>.       *
  ******************************************************************************
- *                          tmpidl_special_functions                          *
+ *                           tmpl_bessel_j0_double                            *
  ******************************************************************************
  *  Purpose:                                                                  *
  *      Provide the special functions sublibrary of libtmpl for IDL users.    *
@@ -63,33 +63,6 @@ void tmpidl_Bessel_I0(int argc, void *argv[])
         y[n] = tmpl_Double_Bessel_I0(x[n]);
 }
 /*  End of tmpidl_Bessel_I0.                                                  */
-
-/*  IDL wrapper for the Bessel J0 function.                                   */
-void tmpidl_Bessel_J0(int argc, void *argv[])
-{
-    /*  Declare two double pointers, the input and output for IDL.            */
-    double *x, *y;
-
-    /*  Size is the size of the input IDL array.                              */
-    uint32_t n, size;
-
-    /*  We're expecting three inputs, so check this.                          */
-    if (argc != 3)
-        return;
-
-    /*  Get the parameters passed from IDL.                                   */
-    x = (double *)argv[0];
-    y = (double *)argv[2];
-    size = *(uint32_t *)argv[1];
-
-    /*  Loop through each point and compute the function for every value.     */
-#ifdef _OPENMP
-#pragma omp parallel for
-#endif
-    for (n = 0U; n < size; ++n)
-        y[n] = tmpl_Double_Bessel_J0(x[n]);
-}
-/*  End of tmpidl_Bessel_J0.                                                  */
 
 /*  IDL wrapper for the Fresnel Cosine function.                              */
 void tmpidl_Fresnel_Cos(int argc, void *argv[])
