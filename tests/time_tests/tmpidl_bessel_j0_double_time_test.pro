@@ -18,7 +18,7 @@
 ;******************************************************************************;
 @../../src/tmpidl_bessel_j0
 PRO TEST
-    X = DINDGEN(10000001) * 0.0001
+    X = DINDGEN(1E7) * 1.0E-4
 
     T1 = SYSTIME(/SECONDS)
     Y_TMPL = TMPIDL_BESSEL_J0(x)

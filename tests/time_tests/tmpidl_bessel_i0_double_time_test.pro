@@ -16,9 +16,9 @@
 ;  You should have received a copy of the GNU General Public License           ;
 ;  along with libtmpidl.  If not, see <https://www.gnu.org/licenses/>.         ;
 ;******************************************************************************;
-@../../src/tmpidl_bessel_j0
+@../../src/tmpidl_bessel_i0
 PRO TEST
-    X = DINDGEN(10000001) * 0.0001
+    X = DINDGEN(1E7) * 1.0E-6
 
     T1 = SYSTIME(/SECONDS)
     Y_TMPL = TMPIDL_BESSEL_I0(x)
@@ -32,6 +32,6 @@ PRO TEST
     PRINT, "IDL Time:    ", T4 - T3
     PRINT, "Ratio:       ", (T4 - T3) / (T2 - T1)
     PRINT, ""
-    PRINT, "Max Errors: ", MAX(ABS(Y_TMPL - Y_IDL))
-    PRINT, "RMS Error:  ", SQRT(MEAN((Y_TMPL - Y_IDL)^2))
+    PRINT, "Max Errors: ", MAX(ABS((Y_TMPL - Y_IDL) / Y_IDL))
+    PRINT, "RMS Error:  ", SQRT(MEAN(((Y_TMPL - Y_IDL) / Y_IDL)^2))
 END
