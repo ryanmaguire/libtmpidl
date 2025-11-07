@@ -31,38 +31,9 @@
 /*  IDL's ULONG is 32-bits. Use stdint for portability.                       */
 #include <stdint.h>
 
-extern void tmpidl_Bessel_J0(int argc, void *argv[]);
-extern void tmpidl_Bessel_I0(int argc, void *argv[]);
 extern void tmpidl_LambertW(int argc, void *argv[]);
 extern void tmpidl_Fresnel_Cos(int argc, void *argv[]);
 extern void tmpidl_Fresnel_Sin(int argc, void *argv[]);
-
-/*  IDL wrapper for the Bessel I0 function.                                   */
-void tmpidl_Bessel_I0(int argc, void *argv[])
-{
-    /*  Declare two double pointers, the input and output for IDL.            */
-    double *x, *y;
-
-    /*  Size is the size of the input IDL array.                              */
-    uint32_t n, size;
-
-    /*  We're expecting three inputs, so check this.                          */
-    if (argc != 3)
-        return;
-
-    /*  Get the parameters passed from IDL.                                   */
-    x = (double *)argv[0];
-    y = (double *)argv[2];
-    size = *(uint32_t *)argv[1];
-
-    /*  Loop through each point and compute the function for every value.     */
-#ifdef _OPENMP
-#pragma omp parallel for
-#endif
-    for (n = 0U; n < size; ++n)
-        y[n] = tmpl_Double_Bessel_I0(x[n]);
-}
-/*  End of tmpidl_Bessel_I0.                                                  */
 
 /*  IDL wrapper for the Fresnel Cosine function.                              */
 void tmpidl_Fresnel_Cos(int argc, void *argv[])
