@@ -21,11 +21,11 @@ PRO TEST
     X = FINDGEN(10000001) * 0.0001
 
     T1 = SYSTIME(/SECONDS)
-    Y_TMPL = TMPIDL_BESSEL_J0(x)
+    Y_TMPL = TMPIDL_BESSEL_I0(x)
     T2 = SYSTIME(/SECONDS)
 
     T3 = SYSTIME(/SECONDS)
-    Y_IDL = BESELJ(x, 0)
+    Y_IDL = BESELI(x, 0)
     T4 = SYSTIME(/SECONDS)
 
     PRINT, "tmpidl Time: ", T2 - T1
