@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpidl.  If not, see <https://www.gnu.org/licenses/>.       *
  ******************************************************************************
- *                            tmpl_bessel_j0_float                            *
+ *                           tmpidl_bessel_j0_float                           *
  ******************************************************************************
  *  Purpose:                                                                  *
  *      Provides an IDL wrapper for single precision J0.                      *
@@ -28,8 +28,8 @@
 /*  TMPL_CAST macro found here, provides casting with C vs. C++ compatibility.*/
 #include <libtmpl/include/compat/tmpl_cast.h>
 
-/*  uint32_t typedef found here.                                              */
-#include <stdint.h>
+/*  Fixed-width 32-bit integers provided here.                                */
+#include <libtmpl/include/tmpl_inttype.h>
 
 /*  Forward declaration for the libtmpl function.                             */
 extern float tmpl_Float_Bessel_J0(float x);
@@ -44,14 +44,14 @@ void tmpidl_Float_Bessel_J0(int argc, void *argv[])
     float *x, *y;
 
     /*  Size is the size of the input IDL array.                              */
-    uint32_t n, size;
+    tmpl_UInt32 n, size;
 
     /*  We're expecting three inputs, so check this.                          */
     if (argc != 3)
         return;
 
     /*  Get the parameters passed from IDL.                                   */
-    size = *TMPL_CAST(argv[0], uint32_t *);
+    size = *TMPL_CAST(argv[0], tmpl_UInt32 *);
     x = TMPL_CAST(argv[1], float *);
     y = TMPL_CAST(argv[2], float *);
 
